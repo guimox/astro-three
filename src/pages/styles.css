@@ -1,0 +1,107 @@
+  *,
+  *:before,
+  *:after {
+    box-sizing: border-box;
+  }
+  
+  html {
+    height: 100%;
+    margin-inline: auto;
+  }
+  
+  body > * {
+    margin-inline: auto;
+    max-width: 1200px;
+  }
+  
+  body {
+    height: 100vh;
+  }
+
+  canvas {
+    opacity: 0;
+    animation: fadeUpAnimation 2.5s ease 1.5s forwards;
+  } 
+  
+  #loader {
+    width: 50px;
+    height: 50px;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    top: 42%;
+    position: absolute;
+    background:
+      radial-gradient(farthest-side, #d12e2e 94%, #0000) top/8px 8px no-repeat,
+      conic-gradient(#0000 30%, #a64545);
+    -webkit-mask: radial-gradient(farthest-side, #0000 calc(100% - 8px), #000 0);
+    animation: l13 1s infinite linear;
+  }
+  @keyframes l13 {
+    100% {
+      transform: rotate(1turn);
+    }
+  }
+  
+  .canvas-container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+  }
+  
+  canvas {
+    width: 100% !important;
+    display: flex;
+    justify-content: center;
+    display: block;
+    height: 100% !important;
+  }
+  
+  #loader.fade-out {
+    opacity: 0;
+    display: none;
+  }
+  
+  @media (max-width: 767px) {
+    .fade-down {
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-20px);
+    }
+  
+    .fade-down.visible {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+  }
+  
+  @keyframes spinAnimation {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+  
+  @keyframes fadeUpAnimation {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  @keyframes fadeDownAnimation {
+    from {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
