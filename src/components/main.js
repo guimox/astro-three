@@ -112,10 +112,10 @@ horizontalBlurMaterial.depthTest = false;
 verticalBlurMaterial = new THREE.ShaderMaterial(VerticalBlurShader);
 verticalBlurMaterial.depthTest = false;
 
-const duckContainer = document.querySelector("#duck");
+const carContainer = document.querySelector("#mclaren");
 const camera = new THREE.PerspectiveCamera(
   11,
-  duckContainer.clientWidth / duckContainer.clientHeight,
+  carContainer.clientWidth / carContainer.clientHeight,
   1,
   1000
 );
@@ -130,11 +130,11 @@ const loadingManager = new THREE.LoadingManager(() => {
   loadingScreen.classList.add("fade-out");
 });
 
-const renderer = new THREE.WebGLRenderer({ canvas: duckContainer });
+const renderer = new THREE.WebGLRenderer({ canvas: carContainer });
 renderer.setPixelRatio(window.devicePixelRatio);
-renderer.setSize(duckContainer.clientWidth, duckContainer.clientHeight);
+renderer.setSize(carContainer.clientWidth, carContainer.clientHeight);
 
-const controls = new OrbitControls(camera, duckContainer);
+const controls = new OrbitControls(camera, carContainer);
 controls.enableZoom = false;
 controls.enablePan = false;
 
@@ -145,21 +145,21 @@ dracoLoader.setDecoderPath("https://www.gstatic.com/draco/v1/decoders/");
 const loader = new GLTFLoader(loadingManager);
 loader.setDRACOLoader(dracoLoader);
 
-let duckModel;
+let carModel;
 
 loader.load(
-  "/duck.glb",
+  "/mclaren.glb",
   (gltf) => {
-    duckModel = gltf.scene;
+    carModel = gltf.scene;
 
-    duckModel.scale.setScalar(0.2);
+    carModel.scale.setScalar(0.2);
 
     var hemiLight = new THREE.HemisphereLight(0xffffff, 0x444444);
     hemiLight.position.set(0, 10, 0);
     scene.add(hemiLight);
 
-    duckModel.rotation.z = -Math.PI / 90;
-    duckModel.position.y = -0.03;
+    carModel.rotation.z = -Math.PI / 90;
+    carModel.position.y = -0.03;
 
     var dirLight = new THREE.DirectionalLight(0xffffff);
     var ambientLight = new THREE.AmbientLight(0xffffff, 0.8);
@@ -181,7 +181,7 @@ loader.load(
     camera.rotation.set(0, 0, 0);
     controls.target.set(0, 0, 0);
 
-    scene.add(duckModel);
+    scene.add(carModel);
     scene.add(ambientLight);
 
     controls.update();
@@ -215,7 +215,7 @@ controls.autoRotate = true;
 function animate() {
   requestAnimationFrame(animate);
 
-  if (duckModel) {
+  if (carModel) {
     controls.update();
   }
 
@@ -228,8 +228,8 @@ animate();
 window.addEventListener("resize", onWindowResize, false);
 
 function onWindowResize() {
-  renderer.setSize(duckContainer.clientWidth, duckContainer.clientHeight);
+  renderer.setSize(carContainer.clientWidth, carContainer.clientHeight);
   renderer.setPixelRatio(window.devicePixelRatio);
-  camera.aspect = duckContainer.clientWidth / duckContainer.clientHeight;
+  camera.aspect = carContainer.clientWidth / carContainer.clientHeight;
   camera.updateProjectionMatrix();
 }
